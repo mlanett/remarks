@@ -173,62 +173,19 @@ header p {
 }
 ```
 
-## Example Post: _posts/2025-10-31-docker-volumes.md
-
-```markdown
----
-layout: default
-title: "Docker volume mounts vs bind mounts"
----
-
-Was confused about the difference between `docker run -v` and `docker run --mount`. Turns out:
-
-**Bind mount**: Links a host directory to container
-```bash
-docker run -v /host/path:/container/path myimage
-```
-
-**Volume**: Docker-managed storage (preferred)
-```bash
-docker run -v myvolume:/container/path myimage
-```
-
-Volumes are better because Docker manages them and they work across platforms. Bind mounts are useful for development when you want to edit files on your host.
-```
-
-## Example Post: _posts/2025-10-30-git-worktree.md
-
-```markdown
----
-layout: default
-title: "Git worktree for parallel branches"
----
-
-Found `git worktree` today - lets you check out multiple branches simultaneously in different directories.
-
-```bash
-git worktree add ../feature-branch feature-branch
-```
-
-Now you have two working directories from the same repo. Useful when you need to quickly reference or test another branch without stashing current work.
-
-Clean up with:
-```bash
-git worktree remove ../feature-branch
-```
-```
-
 ## Setup Instructions
 
 1. Create a new GitHub repository
 2. Clone it locally
 3. Create all the files above in your local repo
 4. Commit and push:
+
    ```bash
    git add .
    git commit -m "Initial commit"
    git push origin main
    ```
+
 5. Enable GitHub Pages:
    - Go to repo Settings → Pages
    - Source: Deploy from branch
