@@ -1,0 +1,16 @@
+title: Mark's Remarks
+description: Thoughts and observations
+url: https://mlanett.github.io
+baseurl: /remarks
+
+# Build settings
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+
+permalink: /:year/:month/:day/:title/
+
+exclude:
+  - README.md
