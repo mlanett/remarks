@@ -1,7 +1,7 @@
 title: Mark's Remarks
 description: Thoughts and observations
 url: https://mlanett.github.io
-baseurl: /remarks
+baseurl: /
 
 # Build settings
 markdown: kramdown
