@@ -3,6 +3,8 @@ layout: default
 title: "the first token problem"
 ---
 
+Ruminations from a year ago…
+
 In the ["Deep Dive into LLMs like ChatGPT"](https://youtu.be/7xTGNNLPyMI?t=6416) video, Andrej Karpathy talks what he calls "models need tokens to think".
 He is showing us the a prompt with two possible responses. Both responses are correct; the questions is which response should we prefer?
 The prompt is a math question, and one response gives the answer followed by an explanation. The other response works out the problem and then provides the answer.
