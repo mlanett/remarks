@@ -60,6 +60,22 @@ header p {
   color: #111;
 }
 
+.section-link {
+  text-decoration: none;
+  color: #aaa;
+  margin-right: 8px;
+  visibility: hidden;
+}
+
+.snippet-header:hover .section-link {
+  visibility: visible;
+}
+
+.section-link:hover {
+  color: #0366d6;
+  text-decoration: none;
+}
+
 .snippet-content {
   color: #444;
 }
@@ -128,6 +144,14 @@ header p {
   
   .snippet-header h2 {
     color: #c9d1d9;
+  }
+  
+  .section-link {
+    color: #30363d;
+  }
+  
+  .section-link:hover {
+    color: #58a6ff;
   }
   
   .snippet-content {
