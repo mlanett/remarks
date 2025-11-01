@@ -13,5 +13,12 @@ kramdown:
 permalink: /:year/:month/:day/:title/
 
 exclude:
+  # Documentation and tooling
   - README.md
+  - Makefile
+  - Gemfile
+  - Gemfile.lock
+  # Scripts and utilities
   - remark
+  # Keep CNAME for GitHub Pages custom domain
+  # _site/ is automatically excluded
