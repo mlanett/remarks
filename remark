@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# 1. Calculates the current timestamp.
+# 2. Creates a temporary file with the layout and title header.
+# 3. Opens a new editor on this file so one can write a post.
+# 4. Detects abort based on exit status or file contents.
+# 5. Generates a filename based on the title.
+# 6. Saves the file in the _posts directory.
+# 7. Commits the file using the title.
+# 8. Pushes the repo.
+
+HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+TEMP_FILE="$HERE/temp.md"
+
+# Check if title was provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <title>"
+    exit 1
+fi
+
+timestamp=$(date +%Y-%m-%d)
+title="$*"
+
+echo "---
+layout: default
+title: \"$title\"
+---
+" > $TEMP_FILE
+
+# Open editor
+EDITOR="${EDITOR:-vim}"
+$EDITOR "$TEMP_FILE"
+
+# Check if file was saved and has content beyond front matter
+# Front matter is 4 lines, so we need at least 5 non-empty lines
+non_empty_lines=$(grep -v '^[[:space:]]*$' "$TEMP_FILE" | wc -l | tr -d ' ')
+
+if [ "$non_empty_lines" -le "4" ]; then
+    echo "Aborted: No content written"
+    rm "$TEMP_FILE"
+    exit 0
+fi
+
+# Extract title from front matter (override original parameter if changed)
+extracted_title=$(grep '^title:' "$TEMP_FILE" | sed 's/^title: *"\(.*\)"$/\1/')
+if [ -n "$extracted_title" ]; then
+    title="$extracted_title"
+fi
+
+# Generate slug from title (lowercase, spaces to hyphens, remove special chars)
+slug=$(echo "$title" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
+
+# Create final filename
+FINAL_FILE="$HERE/_posts/$timestamp-$slug.md"
+
+# Move temp file to final location
+mv "$TEMP_FILE" "$FINAL_FILE"
+
+echo "Created: $FINAL_FILE"
+
+# Commit and push
+cd "$HERE"
+git add "$FINAL_FILE"
+git commit -m "$title"
+git push
+
+echo "Published!"
