@@ -17,9 +17,9 @@ This is what I think of as the "first token" problem.
 We don't want to require the model to have to figure out the entire answer in the first few tokens.
 
 However we tend to dislike verbose answers and often prompt models saying "Give a concise answer" or "no yapping".
-Some response formats such as JSON do effectively the same thing because they require the shape of the answer to be known right away (JSON in particular requires the first token to be punctuation like "{", "[", """, or a number or the word "true" or "false".)
+Some response formats such as JSON do effectively the same thing because they require the shape of the answer to be known right away (JSON in particular requires the first token to be punctuation like `{`, `[`, `"`, or a number or the word `true` or `false`.)
 
-So, if we want models to be able to work out the problem *before* providing the answer, we need to give them an opportunity. This could be "Show your work, then write "Answer:" and show the exact answer. As it happened, the entire industry was thinking about this problem and invented "thinking tags" somewhere in late 2024. This permits the models to spend lots of tokens working out a problem but keeps that output separate from the answer.
+So, if we want models to be able to work out the problem *before* providing the answer, we need to give them an opportunity. This could be "Show your work, then write `Answer:` and show the exact answer. As it happened, the entire industry was thinking about this problem and invented "thinking tags" in late 2024. This permits the models to spend lots of tokens working out a problem but keeps that output separate from the answer.
 
 I definitely think that any prompts requiring JSON responses should only be conducted with thinking models.
 Even with non-JSON responses (say DSPy chat format), it can be beneficial to ask for a "thoughts" answer first. For example:
