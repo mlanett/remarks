@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: "Towards more security - I turned on sha signing for git"
 ---
 

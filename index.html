@@ -4,16 +4,17 @@ layout: default
 
 <div class="snippets">
   {% for post in site.posts %}
-    <article class="snippet" id="{{ post.id }}">
+    <article class="snippet">
       <div class="snippet-header">
         <time>{{ post.date | date: "%Y-%m-%d" }}</time>
         <h2>
-          <a href="#{{ post.id }}" class="section-link">§</a>
+          <a href="{{ post.url | relative_url }}" class="section-link">§</a>
           {{ post.title }}
         </h2>
       </div>
       <div class="snippet-content">
-        {{ post.content }}
+        {{ post.excerpt }}
+        <p><a href="{{ post.url | relative_url }}">Read more →</a></p>
       </div>
     </article>
   {% endfor %}

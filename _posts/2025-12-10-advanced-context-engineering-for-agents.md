@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: "Advanced Context Engineering for Agents"
 ---
 
