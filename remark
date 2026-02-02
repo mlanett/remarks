@@ -12,9 +12,51 @@
 HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TEMP_FILE="$HERE/temp.md"
 
+# Recovery mode: retry publishing if previous attempt failed
+if [ "$1" = "--recover" ]; then
+    cd "$HERE"
+    
+    # Check for staged files in _posts
+    staged=$(git diff --cached --name-only -- "_posts/")
+    if [ -n "$staged" ]; then
+        echo "Found staged file: $staged"
+        # Extract title from the staged post file
+        staged_file=$(echo "$staged" | head -1)
+        title=$(grep '^title:' "$staged_file" | sed 's/^title: *"\(.*\)"$/\1/')
+        if [ -z "$title" ]; then
+            echo "Error: Could not extract title from $staged_file"
+            exit 1
+        fi
+        echo "Committing with title: $title"
+        git commit -m "$title"
+        if [ $? -ne 0 ]; then
+            echo "Error: git commit failed"
+            exit 1
+        fi
+    fi
+    
+    # Check for unpushed commits
+    unpushed=$(git log origin/main..HEAD --oneline 2>/dev/null)
+    if [ -n "$unpushed" ]; then
+        echo "Pushing unpushed commits..."
+        git push
+        if [ $? -ne 0 ]; then
+            echo "Error: git push failed"
+            exit 1
+        fi
+        echo "Published!"
+    elif [ -z "$staged" ]; then
+        echo "Nothing to recover - no staged files or unpushed commits"
+    else
+        echo "Published!"
+    fi
+    exit 0
+fi
+
 # Check if title was provided
 if [ -z "$1" ]; then
     echo "Usage: $0 <title>"
+    echo "       $0 --recover  (retry after a failed publish)"
     exit 1
 fi
 
@@ -61,7 +103,23 @@ echo "Created: $FINAL_FILE"
 # Commit and push
 cd "$HERE"
 git add "$FINAL_FILE"
+if [ $? -ne 0 ]; then
+    echo "Error: git add failed"
+    exit 1
+fi
+
 git commit -m "$title"
+if [ $? -ne 0 ]; then
+    echo "Error: git commit failed. File is staged but not committed."
+    echo "Run '$0 --recover' to retry."
+    exit 1
+fi
+
 git push
+if [ $? -ne 0 ]; then
+    echo "Error: git push failed. Commit succeeded but not pushed."
+    echo "Run '$0 --recover' to retry."
+    exit 1
+fi
 
 echo "Published!"
