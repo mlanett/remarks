@@ -28,8 +28,8 @@ The markdown gets more features. It gets shared. It gets parameterized. It gets 
 
 Ok, you say, Um Mark, this doesn't work, it needs to be hosted, security review, etc.
 
-Sure. That's where Vercel steps in. Or someone else. Basically, someone who today is already doing hosting for small business and startups.
-A month from now you'll see "Vercel AI Studio". It's just like Google AI Studio, but it does hosting. You paste your markdown in, click Build, they build it and host it. And they provide extra features, like monthly security review - their AI bot will review your markdown and code every month, update it, rebuild it for you.
+Sure. That's where GoDaddy steps in. Or someone else. Basically, someone who today is already doing hosting for small business and startups.
+A month from now you'll see "GoDaddy AI Studio". It's just like Google AI Studio, but it does hosting. You paste your markdown in, click Build, they build it and host it. And they provide extra features, like monthly security review - their AI bot will review your markdown and code every month, update it, rebuild it for you.
 
 The markdown can be shared, forked, modified, "pull request"ed, and enhanced by anyone. By everyone.
 
