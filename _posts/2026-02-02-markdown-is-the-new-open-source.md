@@ -6,9 +6,11 @@ title: "Markdown is the new Open Source"
 Here is how I see things going for solo operators or small businesses, soon.
 
 Say you are a solo operator. Massages. You make house visits.
-Your business has some self-promotion, scheduling, and mostly you spend time going around doing actually massages, pay at time of service. Nothing fancy.
-Basically what you need is scheduling.
+Your business has some self-promotion, scheduling, and mostly you spend time going around doing massages, pay at time of service. Nothing fancy.
+Basically what you need is scheduling, which you can do via email.
+
 This is easy.
+
 You can describe your business in a markdown file. You write it up, talk about scheduling rules, travel time, etc.
 Paste it into Google AI Studio.
 Google AI studio generates code for your website. You paste it somewhere, done.
